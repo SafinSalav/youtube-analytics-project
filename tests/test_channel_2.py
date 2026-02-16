@@ -15,12 +15,11 @@ def test_init(channel):
         ":)\nЧат в ТГ: https://t.me/moscowpythonconf\n"
     )
     assert channel.url == (
-        "https://yt3.ggpht.com/ytc/AIdro_nICP5IhVbBsB-KeNqEnRssp"
-        "OBWAFU7r54dPI9y41ew-rs=s88-c-k-c0x00ffffff-no-rj"
+        "https://www.youtube.com/channel/UC-OVMPlMA3-YCIeg4z5z23A"
     )
-    assert channel.subscriber_count == "28100"
-    assert channel.video_count == "860"
-    assert channel.view_count == "2826298"
+    assert channel.subscriber_count == 28100
+    assert channel.video_count == 860
+    assert channel.view_count == 2826362
 
 
 def test_channel_id(channel):
