@@ -22,7 +22,7 @@ class Channel:
         :param view_count: Общее количество просмотров.
         """
         self.__channel_id: str = channel_id
-        channel = self.get_info()
+        channel: dict = self.get_info()
         self.title: str = (
             channel['items'][0]['snippet']['title']
         )
@@ -40,32 +40,60 @@ class Channel:
             channel['items'][0]['statistics']['viewCount']
         )
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """
+        Возвращает строку вида: 'MoscowPython (https://
+        www.youtube.com/channel/UC-OVMPlMA3-YCIeg4z5z23A)'.
+        """
         return f'{self.title} ({self.url})'
 
-    def __add__(self, other):
+    def __add__(self, other) -> int:
+        """
+        Складывает и возвращает количество подписчиков.
+        """
         return self.subscriber_count + other.subscriber_count
 
-    def __sub__(self, other):
+    def __sub__(self, other) -> int:
+        """
+        Высчитывает и возвращает разницу количества подписчиков.
+        """
         return self.subscriber_count - other.subscriber_count
 
-    def __lt__(self, other):
+    def __lt__(self, other) -> bool:
+        """
+        Возвращает True, если у второго канала больше подписчиков.
+        """
         return self.subscriber_count < other.subscriber_count
 
-    def __le__(self, other):
+    def __le__(self, other) -> bool:
+        """
+        Возвращает True, если у первого канала меньше подписчиков.
+        """
         return self.subscriber_count <= other.subscriber_count
 
-    def __gt__(self, other):
+    def __gt__(self, other) -> bool:
+        """
+        Возвращает True, если у первого канала больше подписчиков.
+        """
         return self.subscriber_count > other.subscriber_count
 
-    def __ge__(self, other):
+    def __ge__(self, other) -> bool:
+        """
+        Возвращает True, если у второго канала меньше подписчиков.
+        """
         return self.subscriber_count >= other.subscriber_count
 
-    def __eq__(self, other):
+    def __eq__(self, other) -> bool:
+        """
+        Возвращает True, если количество подписчиков одинаково.
+        """
         return self.subscriber_count == other.subscriber_count
 
     @property
     def channel_id(self) -> str:
+        """
+        Возвращает id канала.
+        """
         return self.__channel_id
 
     def get_info(self) -> dict:
@@ -73,18 +101,16 @@ class Channel:
         Возвращает информацию о канале.
         """
         youtube = self.get_service()
-        channel = youtube.channels().list(
+        return youtube.channels().list(
             id=self.__channel_id,
             part='snippet,statistics'
         ).execute()
-        return channel
 
     def print_info(self) -> None:
         """
         Выводит в консоль информацию о канале.
         """
-        channel = self.get_info()
-        print(json.dumps(channel, indent=2, ensure_ascii=False))
+        print(json.dumps(self.get_info(), indent=2, ensure_ascii=False))
 
     @classmethod
     def get_service(cls):
@@ -93,9 +119,9 @@ class Channel:
         """
         return build('youtube', 'v3', developerKey=api_key)
 
-    def to_json(self, filename):
+    def to_json(self, filename: str) -> None:
         """
-        Сохраняет в файл json значения атрибутов экземпляра класса Channel
+        Сохраняет в файл json значения атрибутов экземпляра класса Channel.
         """
         with open(filename, 'w', encoding='utf-8') as f:
             json.dump(self.__dict__, f, ensure_ascii=False, indent=2)

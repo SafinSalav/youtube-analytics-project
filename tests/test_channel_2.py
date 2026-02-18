@@ -18,8 +18,8 @@ def test_init(channel):
         "https://www.youtube.com/channel/UC-OVMPlMA3-YCIeg4z5z23A"
     )
     assert channel.subscriber_count == 28100
-    assert channel.video_count == 860
-    assert channel.view_count == 2826362
+    assert channel.video_count == 864
+    assert channel.view_count == 2826634
 
 
 def test_channel_id(channel):
