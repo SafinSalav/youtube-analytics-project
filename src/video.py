@@ -1,5 +1,6 @@
 from src.channel import Channel
 from src.printj import printj
+from src.errors import NonexistentID
 
 
 class Video:
@@ -18,18 +19,27 @@ class Video:
         """
         self.video_id: str = video_id
         video_response: dict = self.get_info()
-        self.title: str = (
-            video_response['items'][0]['snippet']['title']
-        )
-        self.url: str = (
-            f'https://youtu.be/{self.video_id}'
-        )
-        self.view_count: int = int(
-            video_response['items'][0]['statistics']['viewCount']
-        )
-        self.like_count: int = int(
-            video_response['items'][0]['statistics']['likeCount']
-        )
+        try:
+            if len(video_response['items']) == 0:
+                raise NonexistentID('Такой video_id не существует.')
+        except NonexistentID:
+            self.title = None
+            self.url = None
+            self.view_count = None
+            self.like_count = None
+        else:
+            self.title: str = (
+                video_response['items'][0]['snippet']['title']
+            )
+            self.url: str = (
+                f'https://youtu.be/{self.video_id}'
+            )
+            self.view_count: int = int(
+                video_response['items'][0]['statistics']['viewCount']
+            )
+            self.like_count: int = int(
+                video_response['items'][0]['statistics']['likeCount']
+            )
 
     def get_info(self) -> dict:
         """
