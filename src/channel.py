@@ -1,5 +1,6 @@
-import json
+from src.printj import printj
 import os
+import json
 from googleapiclient.discovery import build
 
 api_key: str = os.getenv('YT_API_KEY')
@@ -110,7 +111,7 @@ class Channel:
         """
         Выводит в консоль информацию о канале.
         """
-        print(json.dumps(self.get_info(), indent=2, ensure_ascii=False))
+        printj(self.get_info())
 
     @classmethod
     def get_service(cls):

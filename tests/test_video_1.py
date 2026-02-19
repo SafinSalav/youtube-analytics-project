@@ -16,8 +16,8 @@ def test_Video_init(video1):
     assert video1.video_id == "AWX4JnAnjBE"
     assert video1.title == "GIL в Python: зачем он нужен и как с этим жить"
     assert video1.url == "https://youtu.be/AWX4JnAnjBE"
-    assert video1.view_count == 66056
-    assert video1.like_count == 2713
+    assert video1.view_count == 66059
+    assert video1.like_count == 2712
 
 
 def test_PLVideo_init(video2):

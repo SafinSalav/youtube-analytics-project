@@ -1,5 +1,5 @@
-import json
 from src.channel import Channel
+from src.printj import printj
 
 
 class Video:
@@ -45,7 +45,7 @@ class Video:
         """
         Выводит информацию о видео.
         """
-        print(json.dumps(self.get_info(), indent=2, ensure_ascii=False))
+        printj(self.get_info())
 
     def __str__(self) -> str:
         """
